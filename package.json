@@ -2,7 +2,7 @@
   "name": "axios-server",
   "version": "1.0.0",
   "description": "基于axios封装的server服务类",
-  "main": "index.js",
+  "main": "src/service.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
