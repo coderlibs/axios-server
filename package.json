@@ -1,0 +1,35 @@
+{
+  "name": "axios-server",
+  "version": "1.0.0",
+  "description": "基于axios封装的server服务类",
+  "main": "src/service.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/coderlibs/axios-server.git"
+  },
+  "keywords": [
+    "axios-server",
+    "http",
+    "axios",
+    "xhr",
+    "防抖提交",
+    "断线重连",
+    "节流",
+    "自动取消"
+  ],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/coderlibs/axios-server/issues"
+  },
+  "homepage": "https://github.com/coderlibs/axios-server#readme",
+  "dependencies": {
+    "axios": "^1.6.8"
+  },
+  "devDependencies": {
+    "typescript": "^5.4.5"
+  }
+}
