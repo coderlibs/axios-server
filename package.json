@@ -1,6 +1,6 @@
 {
   "name": "axios-server",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "基于axios封装的server服务类",
   "main": "libs/index.js",
   "scripts": {
