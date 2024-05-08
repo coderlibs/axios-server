@@ -1,10 +1,11 @@
 {
   "name": "axios-server",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "基于axios封装的server服务类",
-  "main": "src/service.js",
+  "main": "libs/index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "serve": "rollup -c -w",
+    "build": "rollup --config"
   },
   "repository": {
     "type": "git",
@@ -27,9 +28,15 @@
   },
   "homepage": "https://github.com/coderlibs/axios-server#readme",
   "dependencies": {
-    "axios": "^1.6.8"
+    "axios": "^1.6.8",
+    "rollup-plugin-commonjs": "^10.1.0"
   },
   "devDependencies": {
-    "typescript": "^5.4.5"
+    "@babel/core": "^7.24.5",
+    "@babel/preset-env": "^7.24.5",
+    "@rollup/plugin-typescript": "^11.1.6",
+    "rollup": "^2.79.1",
+    "rollup-plugin-babel": "^4.4.0",
+    "tslib": "^2.6.2"
   }
 }
