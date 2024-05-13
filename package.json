@@ -1,8 +1,8 @@
 {
   "name": "axios-server",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "description": "基于axios封装的server服务类",
-  "main": "libs/index.js",
+  "main": "libs/index.min.js",
   "scripts": {
     "serve": "rollup -c -w",
     "build": "rollup --config"
