@@ -1,9 +1,9 @@
 import axios from 'axios'
-import type { AxiosError, AxiosInstance, AxiosResponse, InternalAxiosRequestConfig } from 'axios'
+import type { AxiosError, AxiosInstance, AxiosRequestConfig, AxiosResponse, InternalAxiosRequestConfig } from 'axios'
 export default class Service {
+
     public axiosInstance: AxiosInstance;
-    public request: any;
-    public response: any;
+
     /**
      *
      * @param {*} [config={}]  配置参数
@@ -12,19 +12,22 @@ export default class Service {
      */
     constructor(config: any, apis: any, prefixUrl = '') {
         this.axiosInstance = axios.create(config)
-        /* 请求拦截器 */
-        this.axiosInstance.interceptors.request.use(this.request ? this.request : (config: InternalAxiosRequestConfig) => {
-            return config
-        }, (error: AxiosError) => {
-            return Promise.reject(error)
-        })
-        /* 响应拦截器 */
-        this.axiosInstance.interceptors.response.use(this.response ? this.response : (response: AxiosResponse) => {
-            return response.data
-        }, (error: AxiosError) => {
-            // 处理 HTTP 网络错误
-            return Promise.reject(error.response?.data)
-        })
+        if (config.useDefaultInterceptor) {
+            /* 请求拦截器 */
+            this.axiosInstance.interceptors.request.use((config: InternalAxiosRequestConfig) => {
+                return config
+            }, (error: AxiosError) => {
+                return Promise.reject(error)
+            })
+            /* 响应拦截器 */
+            this.axiosInstance.interceptors.response.use((response: AxiosResponse) => {
+                return response.data
+            }, (error: AxiosError) => {
+                // 处理 HTTP 网络错误
+                return Promise.reject(error.response?.data)
+            })
+        }
+        
         const keys = Object.keys(apis);
         keys.forEach(key => {
             (this as any)[key] = (options: any = {}) => {
@@ -39,6 +42,51 @@ export default class Service {
                 })
             }
         })
+    }
+
+    /***
+     * http请求最终执行方法
+     * @param r:RequestConfig
+     * @return AxiosPromise<R>
+     * @public
+     */
+    public commit<R = any>(config: AxiosRequestConfig): Promise<R | AxiosResponse<R>> {
+        return this.axiosInstance(config)
+    }
+
+    /**
+     * get
+     * @param {*} [url='']  接口地址
+     * @param {*} [config={}]  配置参数
+     */
+    public get<T = any>(url: string, config?: AxiosRequestConfig): Promise<T> {
+        return this.axiosInstance.get(url, config)
+    }
+    /**
+     * post
+     * @param {*} [url='']  接口地址
+     * @param {*} [data={}]  接口参数
+     * @param {*} [config={}]  配置参数
+     */
+    public post<T = any>(url: string, data?: object, config?: AxiosRequestConfig): Promise<T> {
+        return this.axiosInstance.post(url, data, config)
+    }
+    /** 
+     * put
+     * @param {*} [url='']  接口地址
+     * @param {*} [data={}]  接口参数
+     * @param {*} [config={}]  配置参数
+     */
+    public put<T = any>(url: string, data?: object, config?: AxiosRequestConfig): Promise<T> {
+        return this.axiosInstance.put(url, data, config)
+    }
+    /** 
+     * delete
+     * @param {*} [url='']  接口地址
+     * @param {*} [config={}]  配置参数
+     */
+    public delete<T = any>(url: string, config?: AxiosRequestConfig): Promise<T> {
+        return this.axiosInstance.delete(url, config)
     }
     /**
      *
